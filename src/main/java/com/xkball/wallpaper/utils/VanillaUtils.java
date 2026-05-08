@@ -20,16 +20,6 @@ public class VanillaUtils {
         private static AtomicReference<WinDef.HWND> workerW = new AtomicReference<>();
         private static boolean pauseOnLoseFocusOld = false;
         
-        public static void copyFrameBufferColorTo(RenderTarget from, int to) {
-            GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, from.frameBufferId);
-            GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, to);
-            GL30.glBlitFramebuffer(0,0,from.width,from.height,
-                    0,0,from.width,from.height,
-                    GL30.GL_COLOR_BUFFER_BIT, GL30.GL_NEAREST);
-            GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, 0);
-            GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, 0);
-        }
-        
         public static void setWindowAsBG(int w, int h) {
             if(workerW.get() != null){
                 User32.INSTANCE.DestroyWindow(workerW.get());

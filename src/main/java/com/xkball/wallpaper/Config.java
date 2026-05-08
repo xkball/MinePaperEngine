@@ -6,7 +6,7 @@ import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 
-@EventBusSubscriber(modid = MinePaperEngine.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MinePaperEngine.MODID)
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     static final ModConfigSpec SPEC = BUILDER.build();

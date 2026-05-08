@@ -144,7 +144,7 @@ public class TheSystemTray {
     }
     
     private static WinDef.HICON createIcon() {
-        var iconSet = SharedConstants.getCurrentVersion().isStable() ? IconSet.RELEASE : IconSet.SNAPSHOT;
+        var iconSet = SharedConstants.getCurrentVersion().stable() ? IconSet.RELEASE : IconSet.SNAPSHOT;
         var iconList = ThrowableSupplier.getOrThrow(() -> iconSet.getStandardIcons(Minecraft.getInstance().getVanillaPackResources()));
         var icon = ThrowableSupplier.getOrThrow(() -> ImageIO.read(iconList.getLast().get()));
         //ThrowableSupplier.getOrThrow(() -> ImageIO.write(icon,".png", Path.of("icon").toFile()));

@@ -1,12 +1,12 @@
 package com.xkball.wallpaper.mixin;
 
 import com.mojang.blaze3d.platform.DisplayData;
-import com.mojang.blaze3d.platform.ScreenManager;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.platform.WindowEventHandler;
+import com.mojang.blaze3d.systems.GpuBackend;
 import com.xkball.wallpaper.MinePaperEngine;
 import com.xkball.wallpaper.utils.TheSystemTray;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinWindow {
     
     @Inject(method = "<init>",at = @At("RETURN"))
-    public void onInit(WindowEventHandler eventHandler, ScreenManager screenManager, DisplayData displayData, String preferredFullscreenVideoMode, String title, CallbackInfo ci){
+    public void onInit(WindowEventHandler eventHandler, DisplayData displayData, String fullscreenVideoModeString, String title, GpuBackend backend, CallbackInfo ci){
         if(Util.getPlatform() == Util.OS.WINDOWS) MinePaperEngine.tray = new TheSystemTray();
     }
     

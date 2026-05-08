@@ -10,12 +10,12 @@ public record WindowState(int x, int y, int width, int height, boolean asWallpap
             VanillaUtils.ClientHandler.cancelWindowAsBG();
         }
         var mcWindow = Minecraft.getInstance().getWindow();
-        var window = mcWindow.getWindow();
+        var window = mcWindow.handle();
         GLFW.glfwSetWindowPos(window, x, y);
         GLFW.glfwSetWindowSize(window, width, height);
         if(mcWindow.isFullscreen() != fullscreen){
             mcWindow.toggleFullScreen();
-            mcWindow.updateDisplay();
+            mcWindow.updateFullscreenIfChanged();
         }
         if(asWallpaper){
             VanillaUtils.ClientHandler.setWindowAsBG(width,height);
@@ -29,7 +29,7 @@ public record WindowState(int x, int y, int width, int height, boolean asWallpap
     
     public static WindowState withASWallpaper(){
         var current = current();
-        var screenManager = Minecraft.getInstance().virtualScreen.screenManager;
+        var screenManager = Minecraft.getInstance().getWindow().screenManager;
         var monitor = screenManager.getMonitor(GLFW.glfwGetPrimaryMonitor());
         //noinspection DataFlowIssue
         return new WindowState(current().x(), current().y(), monitor.getCurrentMode().getWidth(), monitor.getCurrentMode().getHeight(), true, false);
